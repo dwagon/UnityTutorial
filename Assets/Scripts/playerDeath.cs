@@ -8,6 +8,7 @@ public class playerDeath : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
+    [SerializeField] AudioSource deathSoundEffect;
 
     private void Start()
     {
@@ -17,13 +18,14 @@ public class playerDeath : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Trap")) {
-           Die(); 
+           Die();
         }
     }
 
     private void Die() {
         anim.SetTrigger("death");
         rb.bodyType = RigidbodyType2D.Static;
+        deathSoundEffect.Play();
     }
 
     private void RestartLevel()
